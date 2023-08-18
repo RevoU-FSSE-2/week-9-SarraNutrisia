@@ -55,6 +55,7 @@ app.get("/transactions", (req, res) => {
 
 // This functions below to add a transaction 
 app.post("/transactions", (req, res) => {
+
     const { user_id, type, amount } = req.body;
     const sql = "INSERT INTO tb_transaction (user_id, type, amount) VALUES (?,?,?)";
 
@@ -64,7 +65,7 @@ app.post("/transactions", (req, res) => {
             res.status(500).send("Error adding transaction");
             return;
         }
-        res.status(201).send("Transaction added successfully");
+        res.json({ id: result.insertId });
     });
 });
 
@@ -95,34 +96,32 @@ db.query(sql, [userId], (err, result) => {
 });
 
 // This functions below to update transaction
-/*app.put("/transactions/:id", (req, res) => {
-    const userId = req.params.id;
+app.put("/transactions/:id", (req, res) => {
+    const id = +req.params.id;
     const { type, amount, user_id } = req.body;
-    const sql = "UPDATE tb_transaction SET type = ? WHERE id = ?";
-    db.query(sql, [type, amount, user_id], (err, result) => {
+    const sql = "UPDATE tb_transaction SET type = ?, amount = ?, user_id = ? WHERE id = ?";
+    db.query(sql, [type, amount, user_id, id], (err, result) => {
         if (err) {
             console.error("Error updating transaction:", err);
             res.status(500).send("Error updating transaction");
             return;
         }
-        res.send("Transaction upload successfully");
+        res.json( { id });
     });
 });
 
-app.delete("transactions/:id", (req, res) => {
-    const transactionId = req.params.transaction_id;
+app.delete("/transactions/:id", (req, res) => {
+    const id = +req.params.id;
     const sql = "DELETE FROM tb_transaction WHERE id = ?";
-    db.query(sql, [userID], (err, result) => {
+    db.query(sql, [id], (err, result) => {
         if (err) {
             console.error("Error deleting transaction:", err);
             res.status(500).send("Error deleting transaction");
             return;
         }
-        res.send("Transaction deleted successfully");
+        res.json({ id: id });
     });
-});*/
-
-
+});
 
 app.listen(port, () => {
     console.log('Server running in ' + port);
