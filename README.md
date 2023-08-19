@@ -122,7 +122,7 @@ Connecting Node.js with MySQL is a straightforward process that involves install
 
 ## The Deployment Link
 
-You can access the REST API from Cyclic by click link: URL : (https://splendid-duck-bracelet.cyclic.cloud/), App Repo : (https://github.com/SarraNutrisia/week-9-SarraNutrisia).
+You can access the REST API from Cyclic by click link: URL : (https://electric-blue-goldfish-hat.cyclic.cloud/), App Repo : (https://github.com/SarraNutrisia/starter-express-api).
 
 The Deployment of this MBanking App is using Railway. 
 
